@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-static size_t	my_strlen(const char *str)
+static size_t	ms_strlen(const char *str)
 {
 	int	length;
 
@@ -10,13 +10,13 @@ static size_t	my_strlen(const char *str)
 	return (length);
 }
 
-static size_t	my_strlcpy(char *dst, const char *src, size_t n)
+static size_t	ms_strlcpy(char *dst, const char *src, size_t n)
 {
 	size_t	i;
 	int		length;
 
 	i = 0;
-	length = my_strlen(src);
+	length = ms_strlen(src);
 	if (n == 0)
 		return (length);
 	while (src[i] && --n)
@@ -28,13 +28,13 @@ static size_t	my_strlcpy(char *dst, const char *src, size_t n)
 	return (length);
 }
 
-char	*my_strchr(const char *str, int c)
+char	*ms_strchr(const char *str, int c)
 {
 	int	i;
 	int	len;
 
 	i = 0;
-	len = my_strlen(str);
+	len = ms_strlen(str);
 	while (i <= len)
 	{
 		if (str[i] == (char)c)
@@ -44,20 +44,20 @@ char	*my_strchr(const char *str, int c)
 	return (0);
 }
 
-char	*my_strdup(const char *s1)
+char	*ms_strdup(const char *s1)
 {
 	char	*dest;
 	size_t	len;
 
-	len = my_strlen((char *)s1) + 1;
+	len = ms_strlen((char *)s1) + 1;
 	dest = (char *)malloc(len);
 	if (!dest)
 		return (0);
-	my_strlcpy(dest, (char *)s1, len);
+	ms_strlcpy(dest, (char *)s1, len);
 	return (dest);
 }
 
-char	*my_strjoin(char const *s1, char const *s2)
+char	*ms_strjoin(char const *s1, char const *s2)
 {
 	char	*d;
 	int		i;
@@ -65,7 +65,7 @@ char	*my_strjoin(char const *s1, char const *s2)
 	i = 0;
 	if (!s1)
 		return (0);
-	d = (char *)malloc(my_strlen(s1) + my_strlen(s2) + 1);
+	d = (char *)malloc(ms_strlen(s1) + ms_strlen(s2) + 1);
 	if (!d)
 		return (0);
 	while (*s1)
@@ -76,21 +76,21 @@ char	*my_strjoin(char const *s1, char const *s2)
 	return (d);
 }
 
-char	*my_substr(char const *s, unsigned int start, size_t len)
+char	*ms_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*d;
 	size_t	slen;
 
 	if (!s)
 		return (0);
-	slen = my_strlen(s);
+	slen = ms_strlen(s);
 	if (len > slen)
 		len = slen;
 	d = (char *)malloc(len + 1);
 	if (!d)
 		return (0);
-	if (start < my_strlen(s))
-		my_strlcpy(d, &s[start], len + 1);
+	if (start < ms_strlen(s))
+		ms_strlcpy(d, &s[start], len + 1);
 	d[len + 1] = 0;
 	return (d);
 }
