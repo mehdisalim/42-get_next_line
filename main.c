@@ -6,10 +6,11 @@ int main(int ac, char **av)
 {
     (void)ac;
     (void)av;
-    int fd = 2;//open(av[1], O_RDONLY);
-    get_next_line(fd);
-    // printf("|%s|",);
-    // printf("|%s|",get_next_line(fd));
+    int fd = open(av[1], O_RDONLY);
+    // get_next_line(fd);
+
+    printf("|%s|",get_next_line(fd));
+    printf("|%s|",get_next_line(fd));
     // printf("|%s|",get_next_line(fd));
     // char text[10];
     // int i = read(10000, text, 12254);
