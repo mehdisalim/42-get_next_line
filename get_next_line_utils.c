@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-static size_t	ms_strlen(const char *str)
+size_t	ft_strlen(char *str)
 {
 	int	length;
 
@@ -10,13 +10,13 @@ static size_t	ms_strlen(const char *str)
 	return (length);
 }
 
-static size_t	ms_strlcpy(char *dst, const char *src, size_t n)
+static size_t	ft_strlcpy(char *dst, char *src, size_t n)
 {
 	size_t	i;
 	int		length;
 
 	i = 0;
-	length = ms_strlen(src);
+	length = ft_strlen(src);
 	if (n == 0)
 		return (length);
 	while (src[i] && --n)
@@ -28,69 +28,69 @@ static size_t	ms_strlcpy(char *dst, const char *src, size_t n)
 	return (length);
 }
 
-char	*ms_strchr(const char *str, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-	int	len;
-
-	i = 0;
-	len = ms_strlen(str);
-	while (i <= len)
+	while (*s != '\0')
 	{
-		if (str[i] == (char)c)
-			return ((char *)str + i);
-		i++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
 	return (0);
 }
-
-char	*ms_strdup(const char *s1)
+char	*ft_strjoin(char *lstr, char *buff)
 {
-	char	*dest;
-	size_t	len;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-	len = ms_strlen((char *)s1) + 1;
-	dest = (char *)malloc(len);
-	if (!dest)
-		return (0);
-	ms_strlcpy(dest, (char *)s1, len);
-	return (dest);
+	if (!lstr)
+	{
+		lstr = (char *)malloc(1 * sizeof(char));
+		lstr[0] = '\0';
+	}
+	if (!lstr || !buff)
+		return (NULL);
+	str = malloc(sizeof(char) * ((ft_strlen(lstr) + ft_strlen(buff)) + 1));
+	if (str == NULL)
+		return (NULL);
+	i = -1;
+	j = 0;
+	while (lstr[++i] != '\0')
+		str[i] = lstr[i];
+	while (buff[j] != '\0')
+		str[i++] = buff[j++];
+	str[ft_strlen(lstr) + ft_strlen(buff)] = '\0';
+	free(lstr);
+	return (str);
 }
 
-char	*ms_strjoin(char const *s1, char const *s2)
-{
-	char	*d;
-	int		i;
-
-	i = 0;
-	if (!s1)
-		return (0);
-	d = (char *)malloc(ms_strlen(s1) + ms_strlen(s2) + 1);
-	if (!d)
-		return (0);
-	while (*s1)
-		d[i++] = *s1++;
-	while (*s2)
-		d[i++] = *s2++;
-	d[i] = 0;
-	return (d);
-}
-
-char	*ms_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*d;
 	size_t	slen;
 
-	if (!s)
+	if (!s || !*s)
 		return (0);
-	slen = ms_strlen(s);
+	slen = ft_strlen(s);
 	if (len > slen)
 		len = slen;
 	d = (char *)malloc(len + 1);
 	if (!d)
 		return (0);
-	if (start < ms_strlen(s))
-		ms_strlcpy(d, &s[start], len + 1);
-	d[len + 1] = 0;
+	if (start < ft_strlen(s))
+		ft_strlcpy(d, &s[start], len + 1);
 	return (d);
+}
+char	*ft_strdup(char *s1)
+{
+	char	*dest;
+	size_t	len;
+
+	len = ft_strlen((char *)s1) + 1;
+	dest = (char *)malloc(len);
+	if (!dest)
+		return (0);
+	ft_strlcpy(dest, (char *)s1, len);
+	return (dest);
 }

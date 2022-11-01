@@ -8,6 +8,11 @@ int main(int ac, char **av)
     (void)av;
     int fd = open(av[1], O_RDONLY);
     // get_next_line(fd);
+    // get_next_line(fd);
+    // get_next_line(fd);
+    // get_next_line(fd);
+    // get_next_line(fd);
+    // get_next_line(fd);
 
     printf("|%s|",get_next_line(fd));
     printf("|%s|",get_next_line(fd));
