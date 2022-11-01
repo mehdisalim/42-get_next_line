@@ -22,20 +22,18 @@ char	*get_next_line(int fd)
 	int		n;
 	char	*newline;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buff, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, buff, 0) < 0)
 		return (0);
-
 	n = 1;
-	while (n != 0)
+	while (n > 0)
 	{
 		n = read(fd, buff, BUFFER_SIZE);
 		buff[n] = '\0';
 		str = ft_strjoin(str, buff);
-		if((newline = ft_strchr(str, '\n')))
+		if(ft_strchr(buff, '\n'))
 			break ;
 	}
-	if (!str)     
-		return (NULL);
+	newline = ft_strchr(str, '\n');
 	if (!str[0])
 		line = 0;
 	else if (!newline)
