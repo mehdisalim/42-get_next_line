@@ -30,11 +30,14 @@ static size_t	ft_strlcpy(char *dst, char *src, size_t n)
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != '\0')
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (s[i] == (unsigned char)c)
+			return ((char *)s + i);
+		i++;
 	}
 	return (0);
 }
@@ -45,10 +48,7 @@ char	*ft_strjoin(char *lstr, char *buff)
 	char	*str;
 
 	if (!lstr)
-	{
-		lstr = (char *)malloc(1 * sizeof(char));
-		lstr[0] = '\0';
-	}
+		lstr = ft_strdup("");
 	if (!lstr || !buff)
 		return (NULL);
 	str = malloc(sizeof(char) * ((ft_strlen(lstr) + ft_strlen(buff)) + 1));
