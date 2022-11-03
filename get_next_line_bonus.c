@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esalim <esalim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:24:42 by esalim            #+#    #+#             */
-/*   Updated: 2022/11/03 14:32:27 by esalim           ###   ########.fr       */
+/*   Updated: 2022/11/03 16:51:15 by esalim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_getbuffer(char *line)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*str;
+	static char	*str[4094];
 	char		buff[BUFFER_SIZE + 1];
 	int			n;
 
@@ -57,11 +57,11 @@ char	*get_next_line(int fd)
 		if (n == -1)
 			n = 0;
 		buff[n] = '\0';
-		str = ft_strjoin(str, buff);
+		str[fd] = ft_strjoin(str[fd], buff);
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
-	line = ft_getline(str);
-	str = ft_getbuffer(str);
+	line = ft_getline(str[fd]);
+	str[fd] = ft_getbuffer(str[fd]);
 	return (line);
 }
